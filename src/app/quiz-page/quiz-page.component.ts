@@ -9,8 +9,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./quiz-page.component.css']
 })
 export class QuizPageComponent {
-  selectedCategory: string | undefined;
-  selectedDifficulty: string | undefined;
+  selectedCategory: string = "";
+  selectedDifficulty: string = "";
   answeredAll: boolean = false;
 
   questions$: Observable<Question[]> = from([]);

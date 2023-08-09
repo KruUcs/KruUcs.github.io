@@ -3,17 +3,19 @@
     <form (ngSubmit)="onCreateQuiz()">
       <select id="categorySelect" name="categorySelect" [(ngModel)]="selectedCategory">
         <ng-container *ngIf="(categories$ | async) as categories">
+            <option disabled value="" selected>Select a category</option>
             <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
         </ng-container>
       </select>
   
       <select id="difficultySelect" name="difficultySelect" [(ngModel)]="selectedDifficulty">
+        <option disabled value="" selected>Select a category</option>
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
       </select>
   
-      <button id="createBtn" type="submit" [disabled]="!selectedCategory || !selectedDifficulty">Create Quiz</button>
+      <button id="createBtn" type="submit" [disabled]="selectedCategory === ''|| selectedDifficulty === '' ">Create Quiz</button>
     </form>
 
     <ng-container *ngIf="(questions$ | async) as questions">
@@ -25,7 +27,7 @@
         </div>
         <br />
         <div *ngIf="answeredAll">
-            <button  type="button" class="btn btn-success" (click)="onSubmitQuiz(questions)">
+            <button  type="button" (click)="onSubmitQuiz(questions)">
               Check Answers
             </button>
         </div>
