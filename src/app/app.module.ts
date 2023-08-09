@@ -8,13 +8,15 @@ import { ResultPageComponent } from './result-page/result-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ScoreBackgroundColorDirective } from './directives/score-background-color.directive';
+import { SanitizeHtmlPipe } from './pipe/sanitize-html.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuizPageComponent,
     ResultPageComponent,
-    ScoreBackgroundColorDirective
+    ScoreBackgroundColorDirective,
+    SanitizeHtmlPipe
   ],
   imports: [
     BrowserModule,

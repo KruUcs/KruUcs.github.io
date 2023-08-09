@@ -20,9 +20,9 @@
 
     <ng-container *ngIf="(questions$ | async) as questions">
         <div *ngFor="let question of questions">
-            <p>{{question.question}}</p>
+            <p>{{question.question | sanitizeHtml}}</p>
             <div *ngFor="let answer of question.shuffled_answers, index as i"> 
-                <button [class.btnAnswerSelected]="question.selected_answer === answer" class="btnAnswer" (click)="selectAnswer(answer, question, questions)"type="button">{{answer}}</button>
+                <button [class.btnAnswerSelected]="question.selected_answer === answer" class="btnAnswer" (click)="selectAnswer(answer, question, questions)"type="button">{{answer | sanitizeHtml}}</button>
             </div>
         </div>
         <br />

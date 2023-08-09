@@ -1,5 +1,5 @@
 <div *ngFor="let question of questions">
-    <p>{{question.question}}</p>
+    <p>{{question.question  | sanitizeHtml}}</p>
     <div *ngFor="let answer of question.shuffled_answers, index as i"> 
         <button 
             type="button" 
@@ -7,7 +7,7 @@
             [class.btnAnswerSelected]="question.selected_answer === answer"
             [class.btnAnswerCorrect]="question.correct_answer === answer"
         >
-            {{answer}}
+            {{answer | sanitizeHtml}}
         </button>
     </div>
 </div>

@@ -38,30 +38,15 @@ export class TriviaService {
 
   getTriviaQuestions(category: string, difficulty: string): Observable<Question[]> {
     const apiUrl = `https://opentdb.com/api.php?amount=5&category=${category}&difficulty=${difficulty}&type=multiple`;
-    return this.http.get<QuestionsResponse>(apiUrl).pipe(
-      map(data => {
-        return data.results.map(question => {
-          // Sanitize question text
-          question.question = this.sanitizeHtml(question.question);
-  
-          const shuffledAnswers = [question.correct_answer, ...question.incorrect_answers];
-          for (let i = shuffledAnswers.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffledAnswers[i], shuffledAnswers[j]] = [shuffledAnswers[j], shuffledAnswers[i]];
-          }
-  
-          // Sanitize answer options
-          question.shuffled_answers = shuffledAnswers.map(answer => this.sanitizeHtml(answer));
-  
-          return question;
-        });
-      })
-    );
-  }
-  
-  private sanitizeHtml(input: string): string {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(input, 'text/html');
-    return doc.documentElement.textContent || '';
+    return this.http.get<QuestionsResponse>(apiUrl).pipe(map(data => {
+      for (let question of data.results) {
+        question.shuffled_answers = [question.correct_answer, ...question.incorrect_answers]
+        for (let i = question.shuffled_answers.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [question.shuffled_answers[i], question.shuffled_answers[j]] = [question.shuffled_answers[j], question.shuffled_answers[i]];
+        }
+      }
+      return data.results;
+    }));
   }
 }
