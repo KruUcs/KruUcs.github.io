@@ -1,0 +1,20 @@
+<div *ngFor="let question of questions">
+    <p>{{question.question}}</p>
+    <div *ngFor="let answer of question.shuffled_answers, index as i"> 
+        <button 
+            type="button" 
+            [disabled]="true"
+            [class.btnAnswerSelected]="question.selected_answer === answer"
+            [class.btnAnswerCorrect]="question.correct_answer === answer"
+        >
+            {{answer}}
+        </button>
+    </div>
+</div>
+<br />
+<button type="button" (click)="createNew()">
+    Create new Quiz
+</button>
+
+
+<p [appScoreBackgroundColor]="score">You scored {{score}} out of 5!</p>

@@ -1,0 +1,7 @@
+.btnAnswerSelected{
+    background-color: red;
+}
+
+.btnAnswerCorrect, .btnAnswerSelected && .btnAnswerCorrect{
+    background-color: green;
+}
