@@ -6,6 +6,7 @@ import { ResultPageComponent } from './result-page/result-page.component';
 const routes: Routes = [
   { path: '', component: QuizPageComponent },
   { path: 'result', component: ResultPageComponent },
+  { path: '**', component: QuizPageComponent },
 ];
 
 @NgModule({
